@@ -1,51 +1,51 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-const generateProfile = (answers) =>
-`<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <title>Document</title>
-</head>
-<body>
-    `
-let Team = [];
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
 
-function Manager() {
+const generateHTML = require("./src/GenerateHTML");
+
+    
+const team = [];
+
+manager()
+
+function manager() {
     inquirer
     .prompt([
     {
         type: 'input',
-        name: 'manager_name',
-        message: 'What is the name of your team manager',
+        name: 'name',
+        message: 'What is the name of this manager',
     },
     {
         type: 'input',
-        name: 'manager_ID',
-        message: 'What is the employee ID of your team manager',
+        name: 'id',
+        message: 'What is the employee ID of this manager',
     },
     {
         type: 'input',
-        name: 'manager_email',
-        message: 'What is the email address of your team manager',
+        name: 'email',
+        message: 'What is the email address of this manager',
     },
     {
         type: 'input',
-        name: 'officeNumber',
+        name: 'office_number',
         message: 'What is the office number of your team manager',
     },
     ])
 
         .then(function(data) {
-            const managerName = data.manager_name
-            const id = data.manager_ID
-            const managerEmail = data.manager_email
-            const officeNumber = data.officeNumber
-            const Member = new Manager(managerName, id, managerEmail, officeNumber)
-            Team.push(Member)
+            const name = data.name
+            const id = data.id
+            const email = data.email
+            const office_number = data.office_number
+            const manager = new Manager(name, id, email, office_number)
+
+            Team.push(manager);
+            console.log(manager);
             teamMemberPrompt();
         });
     }
@@ -56,7 +56,7 @@ function Manager() {
         {
         type: 'list',
         name: 'role',
-        message: 'Would you like to add an engineer or an intern to your team or are you finished building your team?',
+        message: 'What is the role of this team member',
         choices: ['Engineer', 'intern', 'FINISHED'],
         }
 
@@ -84,33 +84,34 @@ function Manager() {
         .prompt([
         {
             type: 'input',
-            name: 'manager_name',
-            message: 'What is the name of your team manager',
+            name: 'name',
+            message: 'What is the engineers name?',
         },
         {
             type: 'input',
-            name: 'manager_ID',
-            message: 'What is the employee ID of your team manager',
+            name: 'id',
+            message: 'What is the employee ID of your engineer?',
         },
         {
             type: 'input',
-            name: 'manager_email',
-            message: 'What is the email address of your team manager',
+            name: 'email',
+            message: 'What is the email address of the engineer?',
         },
         {
             type: 'input',
-            name: 'officeNumber',
-            message: 'What is the office number of your team manager',
+            name: 'GitHub',
+            message: 'What is the GitHub username of your engineer?',
         },
         ])
     
             .then(function(data) {
-                const managerName = data.manager_name
-                const id = data.manager_ID
-                const managerEmail = data.manager_email
-                const officeNumber = data.officeNumber
-                const Member = new Engineer(managerName, id, managerEmail, officeNumber)
-                Team.push(Member)
+                const name = data.name
+                const id = data.id
+                const email = data.email
+                const GitHub = data.GitHub
+                const engineer = new Engineer(name, id, email, GitHub)
+                Team.push(engineer);
+                console.log(engineer);
                 teamMemberPrompt();
             });
         }
@@ -120,33 +121,51 @@ function Manager() {
             .prompt([
             {
                 type: 'input',
-                name: 'manager_name',
-                message: 'What is the name of your team manager',
+                name: 'name',
+                message: 'What is the name of your teams intern?',
             },
             {
                 type: 'input',
-                name: 'manager_ID',
-                message: 'What is the employee ID of your team manager',
+                name: 'id',
+                message: 'What is the employee ID of your intern?',
             },
             {
                 type: 'input',
-                name: 'manager_email',
-                message: 'What is the email address of your team manager',
+                name: 'email',
+                message: 'What is the email address of your intern?',
             },
             {
                 type: 'input',
-                name: 'officeNumber',
-                message: 'What is the office number of your team manager',
+                name: 'school',
+                message: 'What school is your teams intern from?',
             },
             ])
         
                 .then(function(data) {
-                    const managerName = data.manager_name
-                    const id = data.manager_ID
-                    const managerEmail = data.manager_email
-                    const officeNumber = data.officeNumber
-                    const Member = new Intern(managerName, id, managerEmail, officeNumber)
-                    Team.push(Member)
+                    const name = data.name
+                    const id = data.id
+                    const email = data.email
+                    const school = data.school
+                    const Intern = new Intern(name, id, email, school)
+                    Team.push(Intern)
+                    console.log(intern);
                     teamMemberPrompt();
                 });
+            }
+
+            function finishTeam() {
+            inquirer
+             .prompt([
+                {
+                    type: 'input',
+                    name: 'team_name',
+                    message: 'What is the name of your team',
+                },
+   
+                    ])
+
+                const HTMLPageContent = team[data];
+                const fileName = `${team_name.toLowerCase().split(' ').join('')}.html`;
+
+                fs.appendFile(fileName, HTMLPageContent, (err) => err ? console.log(err) : console.log('Successfully generated a team member list html'));
             }
