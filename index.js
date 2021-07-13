@@ -56,7 +56,7 @@ function manager() {
         {
         type: 'list',
         name: 'role',
-        message: 'What is the role of this team member',
+        message: 'What is the role of the next team member you would like to add or is your team complete',
         choices: ['Engineer', 'intern', 'FINISHED'],
         }
 
