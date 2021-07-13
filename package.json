@@ -1,0 +1,29 @@
+{
+  "name": "Team_profile_generator",
+  "version": "1.0.0",
+  "description": "## Links",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "dependencies": {
+    "inquirer": "^8.1.1",
+    "jest": "^27.0.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aladd616/Team_Profile_Generator_ALL.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aladd616/Team_Profile_Generator_ALL/issues"
+  },
+  "homepage": "https://github.com/Aladd616/Team_Profile_Generator_ALL#readme"
+}
